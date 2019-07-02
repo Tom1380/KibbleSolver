@@ -53,6 +53,8 @@ class maze:
 
 	def get_by_coordinates(self, coord):
 		try:
+			if coord.y < 1 or coord.x < 1:
+				raise IndexError
 			return self.map[coord.y - 1][coord.x - 1]
 		except IndexError:
 			return cell('L')
