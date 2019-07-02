@@ -35,6 +35,9 @@ class coordinate:
 
 	def __str__(self):
 		return '({}, {})'.format(self.x, self.y)
+
+	def copy(self):
+		return coordinate(self.x, self.y)
 		
 class maze:
 	def __init__(self, baremap):
@@ -63,22 +66,22 @@ class maze:
 		return self.get_by_coordinates(self.cur)
 
 	def peek_n(self):
-		north = self.cur
+		north = self.cur.copy()
 		north.y -= 1
 		return self.get_by_coordinates(north)
 
 	def peek_e(self):
-		east = self.cur
+		east = self.cur.copy()
 		east.x += 1
 		return self.get_by_coordinates(east)
 
 	def peek_s(self):
-		south = self.cur
+		south = self.cur.copy()
 		south.y += 1
 		return self.get_by_coordinates(south)
 
 	def peek_w(self):
-		west = self.cur
+		west = self.cur.copy()
 		west.x -= 1
 		return self.get_by_coordinates(west)
 
