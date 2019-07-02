@@ -26,7 +26,7 @@ class cell:
 		self.stepped_on = True
 
 	def __str__(self):
-		return '({}, {})'.format(self.value, self.stepped_on)
+		return '(\'{}\', {})'.format(self.value, self.stepped_on)
 		
 class coordinate:
 	def __init__(self, x, y):
