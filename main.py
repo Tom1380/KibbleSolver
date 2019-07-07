@@ -18,7 +18,6 @@ def showmaze():
 
 class cell:
 	def __init__(self, value):
-		super(cell, self).__init__()
 		self.value = value
 		self.stepped_on = False
 
