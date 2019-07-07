@@ -60,7 +60,7 @@ class maze:
 				raise IndexError
 			return self.map[coord.y - 1][coord.x - 1]
 		except IndexError:
-			return cell('L')
+			return cell('X')
 
 	def read_cur(self):
 		return self.get_by_coordinates(self.cur)
@@ -91,7 +91,6 @@ class maze:
 		north.y -= 1
 		value = self.get_by_coordinates(north).value
 		assert(value != 'X')
-		assert(value != 'L')
 		self.cur = north
 		self.read_cur().mark_as_stepped()
 
@@ -101,7 +100,6 @@ class maze:
 		east.x += 1
 		value = self.get_by_coordinates(east).value
 		assert(value != 'X')
-		assert(value != 'L')
 		self.cur = east
 		self.read_cur().mark_as_stepped()
 
@@ -111,7 +109,6 @@ class maze:
 		south.y += 1
 		value = self.get_by_coordinates(south).value
 		assert(value != 'X')
-		assert(value != 'L')
 		self.cur = south
 		self.read_cur().mark_as_stepped()
 
@@ -121,7 +118,6 @@ class maze:
 		west.x -= 1
 		value = self.get_by_coordinates(west).value
 		assert(value != 'X')
-		assert(value != 'L')
 		self.cur = west
 		self.read_cur().mark_as_stepped()
 
