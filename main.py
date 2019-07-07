@@ -41,7 +41,6 @@ class coordinate:
 		
 class maze:
 	def __init__(self, baremap):
-		# 			 ('X' 'A' 'B' '', PASSED_HERE_ALREADY)
 		self.map = [[cell(c) for c in row] for row in baremap]
 		self.cur = self.start_coordinates()
 		self.read_cur().mark_as_stepped()
