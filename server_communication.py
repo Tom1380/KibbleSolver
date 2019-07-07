@@ -5,3 +5,4 @@ import json
 url = 'https://api.noopschallenge.com/mazebot/random?minSize=10&maxSize=10'
 data = requests.get(url).json()
 baremap = data['map']
+starting_coordinates = data['startingPosition']

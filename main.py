@@ -47,10 +47,7 @@ class maze:
 		self.move_log = ''
 
 	def start_coordinates(self):
-		for y, row in enumerate(self.map):
-			for x, cell in enumerate(row):
-				if cell.value == 'A':
-					return coordinate(x + 1, y + 1)
+		return coordinate(sc.starting_coordinates[0] + 1, sc.starting_coordinates[1] + 1)
 
 	def get_by_coordinates(self, coord):
 		try:
