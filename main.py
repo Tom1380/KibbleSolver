@@ -3,14 +3,14 @@ from termcolor import colored
 import server_communication as sc
 
 def showmaze():
-	for location in sc.baremap:
+	for row in sc.baremap:
 		print('            ', end = '')
-		for square in location:
-			if square == 'X':
+		for cell in row:
+			if cell == 'X':
 				print(colored('X ', 'red'), end = '')
-			elif square == ' ':
+			elif cell == ' ':
 				print(colored('O ', 'white'), end = '')
-			elif square == 'B':
+			elif cell == 'B':
 				print(colored('B ', 'green'), end = '')
 			else:
 				print(colored('A ', 'blue'), end = '')
