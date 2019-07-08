@@ -26,7 +26,10 @@ class cell:
 
 	def __str__(self):
 		return '(\'{}\', {})'.format(self.value, self.stepped_on)
-		
+
+	def __repr__(self):
+		return self.__str__()
+
 class coordinate:
 	def __init__(self, x, y):
 		self.x = x
@@ -35,9 +38,12 @@ class coordinate:
 	def __str__(self):
 		return '({}, {})'.format(self.x, self.y)
 
+	def __repr__(self):
+		return self.__str__()
+
 	def copy(self):
 		return coordinate(self.x, self.y)
-		
+
 class maze:
 	def __init__(self, baremap):
 		self.map = [[cell(c) for c in row] for row in baremap]
