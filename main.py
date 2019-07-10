@@ -70,7 +70,7 @@ class fork:
 
 class maze:
 	"""
-	A class designed to move around within it,
+	A class designed to move around within the maze,
 	get information about the cells and keep track of the movements,
 	so we can know the path we have taken when we find the exit cell,
 	thus getting the solution to the maze.
