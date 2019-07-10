@@ -190,3 +190,24 @@ class maze:
 		# to revert to the old move_log.
 		self.move_log = self.move_log[:fork.n_steps]
 		del self.forks[-1]
+
+def main():
+	showmaze()
+	m = maze(sc.baremap)
+	# We keep going until we find the exit cell.
+	while m.read_cur().value != 'B':
+		paths = m.remaining_paths()
+		n_paths = len(paths)
+		# If there are multiple paths we have not explored yet, it's a fork.
+		if n_paths > 1:
+			m.log_fork()
+		# If there are no paths, it's a dead end and we need to go back to the oldest fork.
+		elif n_paths == 0:
+			m.revert_to_last_fork()
+			continue
+		# Whether this is a fork or not, as long as there is a path we move toward a cell we have not stepped on before.
+		m.move(paths[0])
+	print('Solution:', m.move_log)
+
+if __name__ == '__main__':
+	main()
