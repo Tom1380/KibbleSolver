@@ -3,4 +3,4 @@ install:
   - pip3 install -r requirements.txt
 # Does it run without crashing?
 script:
-- ./main.py
+  - ./main.py
