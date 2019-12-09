@@ -1,6 +1,7 @@
 # Kibble Solver
 
 ![Kibble](/kibble.png)
+![Kibble](/example.gif)
 
 An automated solver to the [mazebot](https://github.com/noops-challenge/mazebot)'s mazes.
 
