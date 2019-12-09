@@ -2,5 +2,5 @@ language: python
 install:
   - pip install -r requirements.txt
 # Does it run without crashing?
-  script:
-  - ./main.py
+script:
+- ./main.py
