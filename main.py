@@ -4,6 +4,7 @@ from termcolor import colored
 from readchar import readchar as read_char
 import server_communication as sc
 
+path_is_shown = False
 
 def clear_screen():
     print('\x1b[2J\x1b[1;1H')
@@ -27,7 +28,7 @@ def showmaze(m):
                     print(colored('X ', 'red'), end='')
                 elif cell.value == ' ':
                     print(colored('O ', 'white'), end='')
-            elif cell.value == ' ' and cell.stepped_on:
+            elif path_is_shown and cell.value == ' ' and cell.stepped_on:
                 print(colored('O ', 'white'), end='')
             else:
                 print(colored('" ', 'grey'), end = '')
