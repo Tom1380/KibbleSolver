@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 from time import sleep
 from termcolor import colored
+from readchar import readchar as read_char
 import server_communication as sc
 
 
@@ -241,7 +242,7 @@ def main():
                         'A': 'W', 'W': 'N'}
     while m.read_cur().value != 'B':
         showmaze(m)
-        direction = input('> ').upper()
+        direction = read_char().upper()
         direction = keyword_mappings.get(direction)
         # print(m.peek(direction))
         if direction is not None and m.peek(direction).value != 'X':
