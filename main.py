@@ -4,7 +4,7 @@ from termcolor import colored
 from readchar import readchar as read_char
 import server_communication as sc
 
-path_is_shown = False
+path_is_shown = True
 
 def clear_screen():
     print('\x1b[2J\x1b[1;1H')
