@@ -15,17 +15,19 @@ def showmaze(m):
     for i, row in enumerate(sc.baremap):
         print('            ', end='')
         for j, cell in enumerate(row):
-                        # print('--', i + 1, j + 1, '--')
             if m.cur == coordinate(j + 1, i + 1):
                 print(colored('$ ', 'yellow'), end='')
-            elif cell == 'X':
-                print(colored('X ', 'red'), end='')
-            elif cell == ' ':
-                print(colored('O ', 'white'), end='')
             elif cell == 'B':
                 print(colored('B ', 'green'), end='')
-            else:
+            elif cell == 'A':
                 print(colored('A ', 'blue'), end='')
+            elif abs(m.cur.x - j - 1) + abs(m.cur.y - i - 1) == 1:
+                if cell == 'X':
+                    print(colored('X ', 'red'), end='')
+                elif cell == ' ':
+                    print(colored('O ', 'white'), end='')
+            else:
+                print(colored('" ', 'grey'), end = '')
         print()
 
 
@@ -146,6 +148,17 @@ class maze:
         west.x -= 1
         return self.get_by_coordinates(west)
 
+    # Invokes the correct method based on the direction argument.
+    def peek(self, direction):
+        if direction == 'E':
+            return self.peek_e()
+        elif direction == 'S':
+            return self.peek_s()
+        elif direction == 'W':
+            return self.peek_w()
+        else:
+            return self.peek_n()
+
     # The methods here below all have one purpose: to move to the nearest cells.
     # Once again, the only differences are the directions.
 
@@ -224,20 +237,16 @@ def main():
     # print(m.cur.x, m.cur.y)
     # print(m.cur == coordinate(m.cur.x, m.cur.y))
     # exit()
+    keyword_mappings = {'D': 'E', 'S': 'S',
+                        'A': 'W', 'W': 'N'}
     while m.read_cur().value != 'B':
         showmaze(m)
-        sleep(0.5)
-        paths = m.remaining_paths()
-        n_paths = len(paths)
-        # If there are multiple paths we have not explored yet, it's a fork.
-        if n_paths > 1:
-            m.log_fork()
-        # If there are no paths, it's a dead end and we need to go back to the oldest fork.
-        elif n_paths == 0:
-            m.revert_to_last_fork()
-            continue
-        # Whether this is a fork or not, as long as there is a path we move toward a cell we have not stepped on before.
-        m.move(paths[0])
+        direction = input('> ').upper()
+        direction = keyword_mappings.get(direction)
+        # print(m.peek(direction))
+        if direction is not None and m.peek(direction).value != 'X':
+            m.move(direction)
+
     showmaze(m)
     print('Solution:', m.move_log)
 
