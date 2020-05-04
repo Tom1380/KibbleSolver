@@ -13,20 +13,22 @@ def clear_screen():
 def showmaze(m):
     clear_screen()
     print(m.cur)
-    for i, row in enumerate(sc.baremap):
+    for i, row in enumerate(m):
         print('            ', end='')
         for j, cell in enumerate(row):
             if m.cur == coordinate(j + 1, i + 1):
                 print(colored('$ ', 'yellow'), end='')
-            elif cell == 'B':
+            elif cell.value == 'B':
                 print(colored('B ', 'green'), end='')
-            elif cell == 'A':
+            elif cell.value == 'A':
                 print(colored('A ', 'blue'), end='')
             elif abs(m.cur.x - j - 1) + abs(m.cur.y - i - 1) == 1:
-                if cell == 'X':
+                if cell.value == 'X':
                     print(colored('X ', 'red'), end='')
-                elif cell == ' ':
+                elif cell.value == ' ':
                     print(colored('O ', 'white'), end='')
+            elif cell.value == ' ' and cell.stepped_on:
+                print(colored('O ', 'white'), end='')
             else:
                 print(colored('" ', 'grey'), end = '')
         print()
@@ -125,6 +127,9 @@ class maze:
 
     def read_cur(self):
         return self.get_by_coordinates(self.cur)
+
+    def __iter__(self):
+        yield from self.map
 
     # The methods here below all have one purpose: to check the nearest cells' infos.
     # The only differences are the direction in which you are 'looking'.
