@@ -239,22 +239,27 @@ class maze:
 
 def main():
     m = maze(sc.baremap)
+    global path_is_shown
     # We keep going until we find the exit cell.
     # print(m.cur)
     # print(m.cur.x, m.cur.y)
     # print(m.cur == coordinate(m.cur.x, m.cur.y))
     # exit()
+    showmaze(m)
     keyword_mappings = {'D': 'E', 'S': 'S',
                         'A': 'W', 'W': 'N'}
     while m.read_cur().value != 'B':
-        showmaze(m)
         direction = read_char().upper()
+        if direction == 'O':
+            path_is_shown = not path_is_shown
+            showmaze(m)
+            continue
         direction = keyword_mappings.get(direction)
         # print(m.peek(direction))
         if direction is not None and m.peek(direction).value != 'X':
             m.move(direction)
+            showmaze(m)
 
-    showmaze(m)
     print('Solution:', m.move_log)
 
 
