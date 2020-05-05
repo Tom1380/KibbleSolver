@@ -31,7 +31,7 @@ def showmaze(m):
             elif path_is_shown and cell.value == ' ' and cell.stepped_on:
                 print(colored('O ', 'white'), end='')
             else:
-                print(colored('" ', 'grey'), end = '')
+                print(colored('° ', 'grey'), end = '')
         print()
 
 
