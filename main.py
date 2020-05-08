@@ -6,33 +6,9 @@ import server_communication as sc
 
 path_is_shown = True
 
+
 def clear_screen():
     print('\x1b[2J\x1b[1;1H')
-
-
-# Prints a representation of the maze in the terminal window.
-def showmaze(m):
-    clear_screen()
-    print(m.cur)
-    for i, row in enumerate(m):
-        print('            ', end='')
-        for j, cell in enumerate(row):
-            if m.cur == coordinate(j + 1, i + 1):
-                print(colored('$ ', 'yellow'), end='')
-            elif cell.value == 'B':
-                print(colored('B ', 'green'), end='')
-            elif cell.value == 'A':
-                print(colored('A ', 'blue'), end='')
-            elif abs(m.cur.x - j - 1) + abs(m.cur.y - i - 1) == 1:
-                if cell.value == 'X':
-                    print(colored('X ', 'red'), end='')
-                elif cell.value == ' ':
-                    print(colored('O ', 'white'), end='')
-            elif path_is_shown and cell.value == ' ' and cell.stepped_on:
-                print(colored('O ', 'white'), end='')
-            else:
-                print(colored('° ', 'grey'), end = '')
-        print()
 
 
 class cell:
@@ -236,29 +212,48 @@ class maze:
         self.move_log = self.move_log[:fork.n_steps]
         del self.forks[-1]
 
+    # Prints a representation of the maze in the terminal window.
+    def print(self):
+        clear_screen()
+        print(self.cur)
+        for i, row in enumerate(self):
+            print('            ', end='')
+            for j, cell in enumerate(row):
+                if self.cur == coordinate(j + 1, i + 1):
+                    print(colored('$ ', 'yellow'), end='')
+                elif cell.value == 'B':
+                    print(colored('B ', 'green'), end='')
+                elif cell.value == 'A':
+                    print(colored('A ', 'blue'), end='')
+                elif abs(self.cur.x - j - 1) + abs(self.cur.y - i - 1) == 1:
+                    if cell.value == 'X':
+                        print(colored('X ', 'red'), end='')
+                    elif cell.value == ' ':
+                        print(colored('O ', 'white'), end='')
+                elif path_is_shown and cell.value == ' ' and cell.stepped_on:
+                    print(colored('O ', 'white'), end='')
+                else:
+                    print(colored('° ', 'grey'), end='')
+            print()
+
 
 def main():
     m = maze(sc.baremap)
     global path_is_shown
-    # We keep going until we find the exit cell.
-    # print(m.cur)
-    # print(m.cur.x, m.cur.y)
-    # print(m.cur == coordinate(m.cur.x, m.cur.y))
-    # exit()
-    showmaze(m)
+    m.print()
     keyword_mappings = {'D': 'E', 'S': 'S',
                         'A': 'W', 'W': 'N'}
     while m.read_cur().value != 'B':
         direction = read_char().upper()
         if direction == 'O':
             path_is_shown = not path_is_shown
-            showmaze(m)
+            m.print()
             continue
         direction = keyword_mappings.get(direction)
         # print(m.peek(direction))
         if direction is not None and m.peek(direction).value != 'X':
             m.move(direction)
-            showmaze(m)
+            m.print()
 
     print('Solution:', m.move_log)
 
