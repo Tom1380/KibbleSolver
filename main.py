@@ -21,7 +21,7 @@ def showmaze(m):
             elif cell == 'X':
                 print(colored('X ', 'red'), end='')
             elif cell == ' ':
-                print(colored('O ', 'white'), end='')
+                print(colored('O ', 'white'), end='')#test
             elif cell == 'B':
                 print(colored('B ', 'green'), end='')
             else:
